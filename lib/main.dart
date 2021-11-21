@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'audioManager.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,15 +32,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  late AudioPlayer audioPlayer;
+  late final AudioManager _audioManager;
 
+  @override
+  void initState() {
+    super.initState();
+    _audioManager = AudioManager();
+  }
 
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  void onPressed()
+  {
+    _audioManager.play;
   }
 
   @override
@@ -50,204 +53,212 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
       ),
 
-      body: Container(
-        child: GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(10),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2,
-          children: <Widget>[
+      body: GridView.count(
+        primary: false,
+        padding: const EdgeInsets.all(10),
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        crossAxisCount: 2,
+        children: <Widget>[
 
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.greenAccent,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(20),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.orangeAccent,
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
               ),
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text('Hello',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                IconButton(
-                  icon: const Icon(Icons.volume_up),
-                  onPressed: () async{
-                    await audioPlayer.setUrl('https://nihongoshark.com/wp-content/uploads/2015/05/konnichiwa.mp3?_=1');
-                    audioPlayer.play();
-                  }
-                ),
-                ],
-              ),
+              borderRadius: BorderRadius.circular(20),
             ),
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text('Hello!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                IconButton(onPressed: onPressed,
+                    icon: const Icon(Icons.volume_up))
+              ],
+            ),
+          ),
 
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.greenAccent,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(20),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.greenAccent,
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
               ),
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
-                  Text('こんにちは',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+              borderRadius: BorderRadius.circular(20),
             ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.orangeAccent,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:  <Widget>[
+               const Text('こんにちは',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                borderRadius: BorderRadius.circular(20),
+                IconButton(onPressed: onPressed,
+                    icon: const Icon(Icons.volume_up))
+              ],
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.orangeAccent,
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
               ),
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
 
-                  Text('My name is',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                const Text('Good morning!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.greenAccent,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
                 ),
-                borderRadius: BorderRadius.circular(20),
+                IconButton(onPressed: onPressed,
+                    icon: const Icon(Icons.volume_up))
+              ],
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.greenAccent,
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
               ),
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
-                  Text('私の名前は',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:  <Widget>[
+               const Text('おはようございます',
+                  style: TextStyle(
+                    fontSize: 10.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.orangeAccent,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
                 ),
-                borderRadius: BorderRadius.circular(20),
+                IconButton(onPressed: onPressed,
+                    icon: const Icon(Icons.volume_up))
+              ],
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.orangeAccent,
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
               ),
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
 
-                  Text('How are you?',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+               const Text('Good evening.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.greenAccent,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
                 ),
-                borderRadius: BorderRadius.circular(20),
+                IconButton(onPressed: onPressed,
+                    icon: const Icon(Icons.volume_up))
+              ],
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.greenAccent,
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
               ),
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
-                  Text('元気ですか？',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text('こんばんは',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.orangeAccent,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
                 ),
-                borderRadius: BorderRadius.circular(20),
+                IconButton(onPressed: onPressed,
+                    icon: const Icon(Icons.volume_up))
+              ],
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.orangeAccent,
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
               ),
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:  <Widget>[
 
-                  Text('I am good.',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+               const Text('I am good.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.greenAccent,
-                border: Border.all(
-                  color: Colors.white,
-                  width: 2,
                 ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[
-                  Text('私は元気です。',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+                IconButton(onPressed: onPressed,
+                    icon: const Icon(Icons.volume_up))
+              ],
             ),
-          ],
-        ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.greenAccent,
+              border: Border.all(
+                color: Colors.white,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+               const Text('私は元気です。',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                IconButton(onPressed: onPressed,
+                    icon: const Icon(Icons.volume_up))
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
